@@ -1,0 +1,33 @@
+<ng-container *ngIf="card$ | async as card">
+  <div class="card_container">
+    <div class="card_container_link_wrap">
+      <img src="../../../assets/arrow-left.svg" alt="arrow" />
+      <a routerLink="/dashboard">Вернуться</a>
+    </div>
+
+    <div>
+      <h1 class="person_name">{{ card.title.english }}</h1>
+      <div class="person_info_container">
+        <div class="person_info">
+          Cезон <span>{{ card.season }}</span>
+        </div>
+        <div class="person_info skin">
+          Тип <span>{{ card.source }}</span>
+        </div>
+        <div class="person_info skin">
+          Год выпуска <span>{{ card.seasonYear | date }}</span>
+        </div>
+      </div>
+
+      <div class="person_info_container">
+        <div class="person_info">
+          <img class="image" [src]="card.coverImage?.extraLarge" alt="img">
+        </div>
+        <div class="person_info skin">
+          Описание <span class="ml" [innerHTML]="card.description"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+

@@ -1,0 +1,42 @@
+<div class="dashboard_wrap">
+  <div class="dashboard_list_wrap">
+    <h1 class="dashboard_title">Peoples from StarWars</h1>
+
+    <ng-container *ngIf="service.changeList$ | async; else loading">
+      <div *ngFor="let card of service.currentPageList; let i = index" class="card">
+        <div class="card_title_wrap">
+          <a class="card_title"
+             routerLink="/card/{{ card.id }}">
+            {{ card.title.english }}
+            <img src="../assets/icon.svg" alt="arrow"/>
+          </a>
+        </div>
+
+        <div class="description">
+          <div class="description_type_text">Сезон</div>
+          <div class="description_value_text">{{ card.season }}</div>
+          <div class="description_type_text">Тип</div>
+          <div class="description_value_text">{{ card.source }}</div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="service.maxCount >= 2">
+        <div class="paginate" *ngIf="service.maxCount !== 1">
+          <button class="arrow" (click)="service.prevPage()">&lsaquo;</button>
+          <span class="paginate_count">{{service.counter}}</span>
+          <button class="arrow" (click)="service.nextPage()">&rsaquo;</button>
+        </div>
+      </ng-container>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="dashboard_list_wrap">
+        <h2 class="dashboard_title">Идет загрузка...</h2>
+      </div>
+    </ng-template>
+  </div>
+
+  <app-search-form [data]="dataList$" (newList)="updateDate($event)"></app-search-form>
+</div>
+

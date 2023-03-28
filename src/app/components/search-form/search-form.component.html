@@ -1,0 +1,44 @@
+<div class="filters_wrap">
+  <h2 class="filters_title">Фильтры</h2>
+  <input
+    class="filters_input"
+    type="text"
+    [(ngModel)]="service.searchTitle"
+    (ngModelChange)="submit()"
+    placeholder="Название"
+  />
+
+  <div class="filters_skills_wrap">
+    Cезон
+    <p>Выбраны {{service.getChecked()}}</p>
+    <ul class="filters_season">
+      <li *ngFor="let season of service.seasonElements">
+        <label>
+          <input type="checkbox"
+                 [name]="season.name"
+                 [(ngModel)]="season.selected"
+                 (ngModelChange)="submit()"
+          >
+          {{ season.name }}
+        </label>
+      </li>
+    </ul>
+  </div>
+  <br>
+  <div class="filters_source">
+    <h4>Tип источника</h4>
+    <ul>
+      <li *ngFor="let source of service.sourceElements; let i = index;">
+        <label>
+          <input type="radio"
+                 [name]="source.name"
+                 [value]="source.id"
+                 [(ngModel)]="service.selectedSourceId"
+                 (click)="service.toggleSource(i); submit()"
+          >
+          {{ source.name }}
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>
